@@ -981,7 +981,7 @@ void Window::_window_input_text(const String &p_text) {
 }
 
 void Window::_window_drop_files(const Vector<String> &p_files) {
-	emit_signal(SNAME("files_dropped"), p_files, current_screen);
+	emit_signal(SNAME("files_dropped"), p_files);
 }
 
 Viewport *Window::get_parent_viewport() const {
@@ -1079,6 +1079,7 @@ void Window::popup_centered(const Size2i &p_minsize) {
 void Window::popup_centered_ratio(float p_ratio) {
 	ERR_FAIL_COND(!is_inside_tree());
 	ERR_FAIL_COND_MSG(window_id == DisplayServer::MAIN_WINDOW_ID, "Can't popup the main window.");
+	ERR_FAIL_COND_MSG(p_ratio <= 0.0 || p_ratio > 1.0, "Ratio must be between 0.0 and 1.0!");
 
 	Rect2 parent_rect;
 
